@@ -1,0 +1,25 @@
+{
+  "name": "german-embassy-appointment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zarghamkhandev/german-embassy-appointment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zarghamkhandev/german-embassy-appointment/issues"
+  },
+  "homepage": "https://github.com/zarghamkhandev/german-embassy-appointment#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.47.1",
+    "@types/node": "^22.5.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
