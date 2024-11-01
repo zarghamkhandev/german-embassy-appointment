@@ -1,0 +1,27 @@
+name: "Reusable playwright dependencies installation"
+description: "A composite action to use as a step in your workflow job. You need to checkout the last commit and get credentials from the leanix/secrets-action before using this action."
+
+# DISCLAIMER: Required steps to run before running this action in a step:
+# - actions/checkout@v4
+# - leanix/secrets-action@master
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get installed Playwright version
+      id: playwright-version
+      shell: bash
+      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+
+    - name: Cache playwright binaries
+      uses: actions/cache@v4
+      id: playwright-cache
+      with:
+        path: |
+          ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+    - name: Install Playwright Dependencies
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: npx playwright install chromium --with-deps
