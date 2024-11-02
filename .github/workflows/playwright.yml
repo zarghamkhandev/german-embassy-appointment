@@ -1,7 +1,6 @@
 name: Playwright Tests
 on:
-  schedule:
-    - cron: "*/2 * * * *"
+  repository_dispatch:
 jobs:
   test:
     timeout-minutes: 3
