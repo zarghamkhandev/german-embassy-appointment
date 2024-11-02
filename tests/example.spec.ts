@@ -15,7 +15,7 @@ test("send summer semester notification", async ({ page }) => {
     .getByLabel(/Visa category for study purposes/)
     .textContent();
 
-  if (options && /summer/.test(options)) {
+  if (options && /winter/.test(options)) {
     await sendSMS(page);
     await sendVoice(page);
     console.log("Appointment found 🎉, notification sent");
