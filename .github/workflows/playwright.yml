@@ -4,7 +4,6 @@ on:
   push:
     schedule:
       - cron: "* * * * *"
-    branches: [main]
 jobs:
   test:
     timeout-minutes: 3
