@@ -5,22 +5,16 @@ test("send summer semester notification", async ({ page }) => {
     "https://service2.diplo.de/rktermin/extern/appointment_showForm.do?locationCode=isla&realmId=108&categoryId=1600",
   );
 
-  await expect(
-    page.locator(".wrapper div", {
-      hasText: /Appointment waiting list to apply for a study visa/,
-    }),
-  ).toBeAttached();
+  await expect
+    .soft(page.locator("#main #content .wrapper"))
+    .toBeAttached({ timeout: 2000 });
 
-  const options = await page
-    .getByLabel(/Visa category for study purposes/)
-    .textContent();
-
-  if (options && /summer/.test(options)) {
+  if ((await page.getByRole("textbox").all()).length > 0) {
     await sendSMS(page);
     await sendVoice(page);
     console.log("Appointment found 🎉, notification sent");
   } else {
-    console.log("Appointment found, notification sent");
+    console.log("Appointment not found.");
   }
 });
 
