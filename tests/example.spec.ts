@@ -1,6 +1,6 @@
 import { test, expect, Page } from "@playwright/test";
 
-test("send summer semester notification", async ({ page }) => {
+test("check old page", async ({ page }) => {
   await page.goto(
     "https://service2.diplo.de/rktermin/extern/appointment_showForm.do?locationCode=isla&realmId=108&categoryId=1600",
   );
