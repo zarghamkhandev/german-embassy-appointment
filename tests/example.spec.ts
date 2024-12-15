@@ -18,6 +18,25 @@ test("check old page", async ({ page }) => {
   }
 });
 
+test("check list page", async ({ page }) => {
+  await page.goto(
+    "https://service2.diplo.de/rktermin/extern/choose_categoryList.do?locationCode=isla&realmId=108",
+  );
+
+  const blocks = await page.getByText(/Continue/).all();
+
+  if (
+    blocks.length > 4 &&
+    (await page.getByText(/study/).first().isVisible())
+  ) {
+    await sendSMS(page);
+    await sendVoice(page);
+    console.log("Appointment found 🎉, notification sent");
+  } else {
+    console.log("Appointment not found.");
+  }
+});
+
 const recievers = ["+491783078957", "+923226168996", "+923047818798"];
 
 async function sendSMS(page: Page): Promise<void> {
